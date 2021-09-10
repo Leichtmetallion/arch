@@ -258,8 +258,6 @@ function init() {
 
     init_log
     loadkeys $KEYS
-    systemctl stop rpcbind.socket rpcbind.service sshd.service sshd.socket cupsd.socket cupsd.service avahi-daemon.service avahi-daemon.socket rsyncd.socket rsyncd.service
-	systemctl mask rpcbind.socket rpcbind.service sshd.service sshd.socket cupsd.socket cupsd.service avahi-daemon.service avahi-daemon.socket rsyncd.socket rsyncd.service
 }
 
 function init_log() {
