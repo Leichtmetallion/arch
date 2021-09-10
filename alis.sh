@@ -258,6 +258,8 @@ function init() {
 
     init_log
     loadkeys $KEYS
+    systemctl stop rpcbind.socket rpcbind.service sshd.service sshd.socket cupsd.socket cupsd.service avahi-daemon.service avahi-daemon.socket rsyncd.socket rsyncd.service
+	systemctl mask rpcbind.socket rpcbind.service sshd.service sshd.socket cupsd.socket cupsd.service avahi-daemon.service avahi-daemon.socket rsyncd.socket rsyncd.service
 }
 
 function init_log() {
@@ -1845,6 +1847,10 @@ function load_globals() {
     fi
 }
 
+function set_systemd() {
+    ./systemctl.sh
+}
+
 function save_globals() {
     cat <<EOT > $GLOBALS_FILE
 ASCIINEMA="$ASCIINEMA"
@@ -1934,6 +1940,7 @@ function main() {
         execute_step "vagrant" "${STEPS}"
     fi
     execute_step "systemd_units" "${STEPS}"
+    execute_step "set_systemd" "${STEPS}"
     execute_step "end" "${STEPS}"
 }
 
